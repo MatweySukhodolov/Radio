@@ -1,31 +1,23 @@
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@AllArgsConstructor
+@NoArgsConstructor
+@Data
+
 public class Radio {
     private int currentStation; //станция
-    private int currentVolume; //громкость
-    private int maxStation; //максимальная станция
-    private int minStation; //минимальная станция
-
-    public Radio() {
-        this.maxStation = 9;
-        this.minStation = 0;
-
-    }
-
-    public int getCurrentStation() {
-        return currentStation;
-    }
+    private int currentVolume; //громкоcть
 
     public void setCurrentStation(int newCurrentStation) {
-        if (newCurrentStation > maxStation) {
+        if (newCurrentStation > 9) {
             return;
         }
-        if (newCurrentStation < minStation) {
+        if (newCurrentStation < 0) {
             return;
         }
         currentStation = newCurrentStation;
-    }
-
-    public int getCurrentVolume() {
-        return currentVolume;
     }
 
     public void setCurrentVolume(int newCurrentVolume) {
@@ -33,25 +25,24 @@ public class Radio {
             return;
         }
         if (newCurrentVolume < 0) {
-
             return;
         }
         currentVolume = newCurrentVolume;
     }
 
     public void next() {
-        if (currentStation < maxStation) {
+        if (currentStation < 9) {
             currentStation = currentStation + 1;
         } else {
-            currentStation = minStation;
+            currentStation = 0;
         }
     }
 
     public void prev() {
-        if (currentStation > minStation) {
+        if (currentStation > 0) {
             currentStation = currentStation - 1;
         } else {
-            currentStation = maxStation;
+            currentStation = 9;
         }
     }
 
@@ -67,3 +58,4 @@ public class Radio {
         }
     }
 }
+
