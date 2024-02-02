@@ -8,54 +8,67 @@ import lombok.NoArgsConstructor;
 
 public class Radio {
     private int currentStation; //станция
-    private int currentVolume; //громкоcть
+    private int currentVolume; //громкость
+    private int maxStation = 9; //максимальная станция
+    private int minStations = 0; //минимальная станция
+    private int maxVolume = 100; //максимальная громкость
+    private int minVolume = 0; //минимальная громкость
+
+    public Radio(int stationsCount, int volumeCount) {
+        this.maxStation = stationsCount - 1;
+        this.minStations = stationsCount + 1;
+        this.maxVolume = volumeCount - 1;
+        this.minVolume = volumeCount + 1;
+
+    }
+
 
     public void setCurrentStation(int newCurrentStation) {
-        if (newCurrentStation > 9) {
+        if (newCurrentStation > maxStation) {
             return;
         }
-        if (newCurrentStation < 0) {
+        if (newCurrentStation < minStations) {
             return;
         }
         currentStation = newCurrentStation;
     }
 
+
     public void setCurrentVolume(int newCurrentVolume) {
-        if (newCurrentVolume > 100) {
+        if (newCurrentVolume > maxVolume) {
             return;
         }
-        if (newCurrentVolume < 0) {
+        if (newCurrentVolume < minVolume) {
             return;
         }
         currentVolume = newCurrentVolume;
     }
 
     public void next() {
-        if (currentStation < 9) {
+        if (currentStation != maxStation) {
             currentStation = currentStation + 1;
         } else {
-            currentStation = 0;
+            currentStation = minStations;
         }
     }
 
     public void prev() {
-        if (currentStation > 0) {
+        if (currentStation != minStations) {
             currentStation = currentStation - 1;
         } else {
-            currentStation = 9;
+            currentStation = maxStation;
         }
     }
 
     public void volumeUp() {
-        if (currentVolume < 100) {
-            currentVolume++;
+        if (currentVolume < maxVolume) {
+            currentVolume = currentVolume + 1;
         }
     }
 
     public void volumeDown() {
-        if (currentVolume > 0) {
+        if (currentVolume > minVolume) {
             currentVolume = currentVolume - 1;
         }
     }
 }
-
